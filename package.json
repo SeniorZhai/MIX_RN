@@ -1,0 +1,16 @@
+{
+  "name": "mix_rn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-native": "^0.55.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "author": "",
+  "license": "ISC"
+}
