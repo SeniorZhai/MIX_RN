@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.fab
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
@@ -30,6 +31,11 @@ class MainActivity : AppCompatActivity() {
         }
       }
     }
+
+  }
+
+  fun click(view: View) {
+    MyApplication.getReactPackage().mModule.nativeCallRn("hello")
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
