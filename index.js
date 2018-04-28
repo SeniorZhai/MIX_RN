@@ -3,14 +3,23 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  NativeModules
 } from 'react-native';
 
 class HelloWorld extends React.Component {
+
+  rnCallNative(){
+    NativeModules.RN_Module.rnCallNative("message");
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.hello}>Hello, World</Text>
+        <Text style={styles.hello}
+
+        onPress={this.rnCallNative.bind(this)}>
+        Click me
+        </Text>
       </View>
     )
   }

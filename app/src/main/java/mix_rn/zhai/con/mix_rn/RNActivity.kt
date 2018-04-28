@@ -5,9 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import com.facebook.react.ReactInstanceManager
 import com.facebook.react.ReactRootView
-import com.facebook.react.common.LifecycleState
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
-import com.facebook.react.shell.MainReactPackage
 
 
 class RNActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
@@ -17,17 +15,11 @@ class RNActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     mReactRootView = ReactRootView(this)
-    mReactInstanceManager = ReactInstanceManager.builder()
-        .setApplication(application)
-        .setBundleAssetName("index.android.bundle")
-        .setJSMainModulePath("index")
-        .addPackage(MainReactPackage())
-        .setUseDeveloperSupport(BuildConfig.DEBUG)
-        .setInitialLifecycleState(LifecycleState.RESUMED)
-        .build()
+    mReactInstanceManager = (application as MyApplication).reactNativeHost.reactInstanceManager
 
     setContentView(mReactRootView)
-    mReactRootView?.startReactApplication(mReactInstanceManager, "APP", null)
+    mReactRootView?.startReactApplication(
+        mReactInstanceManager, "APP", null)
 
   }
 
