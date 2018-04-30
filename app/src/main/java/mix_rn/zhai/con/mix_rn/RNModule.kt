@@ -5,11 +5,11 @@ import android.util.ArrayMap
 import android.util.Log
 import android.widget.Toast
 import com.facebook.react.bridge.Callback
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.modules.core.DeviceEventManagerModule
-
 
 /**
  * 通信Module类
@@ -40,6 +40,16 @@ class RNModule
     Log.d("tag", msg)
     val result = "回调RN"
     callback.invoke(result)
+  }
+
+
+  @ReactMethod
+  fun rnCallNativeFromPromise(msg: String, promise: Promise) {
+    Log.e("tag", msg)
+    // 1.处理业务逻辑...
+    val result = "处理结果：返回结果"
+    // 2.回调RN,即将处理结果返回给RN
+    promise.resolve(result)
   }
 
   @Nullable

@@ -16,6 +16,7 @@ class RNActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
   private var mReactRootView: ReactRootView? = null
   private var mReactInstanceManager: ReactInstanceManager? = null
 
+  private val timer = Timer()
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     mReactRootView = ReactRootView(this)
@@ -26,13 +27,14 @@ class RNActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
         mReactInstanceManager, "APP", null)
     // 轮询任务
     val sdf = SimpleDateFormat("HH:mm:ss")
-    val timer = Timer()
+
     timer.schedule(object : TimerTask() {
       override fun run() {
         val currentTime = sdf.format(Date())
         nativeCallRn("消息:$currentTime")
       }
     }, 3000, 5000)
+
   }
 
   fun nativeCallRn(msg: String) {
@@ -73,6 +75,10 @@ class RNActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
     if (mReactInstanceManager != null) {
       mReactInstanceManager!!.onHostDestroy(this)
     }
+    mReactRootView?.unmountReactApplication()
+    mReactRootView = null
+
+    timer.cancel()
   }
 
   override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {

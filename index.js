@@ -34,6 +34,15 @@ class HelloWorld extends React.Component {
        })
    }
 
+   // 只能调用一次
+   promiseComm(msg) {
+       NativeModules.RN_Module.rnCallNativeFromPromise(msg).then(
+           (result) =>{
+               console.log("Promise收到消息:" + result, ToastAndroid.SHORT)
+           }
+       ).catch((error) =>{console.log(error)});
+   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -47,6 +56,12 @@ class HelloWorld extends React.Component {
         onPress={this.callbackComm("调用原生callback")}>
         Callback
         </Text>
+
+         <Text style={styles.hello}
+        onPress={this.promiseComm("调用原生promise")}>
+        Promise
+        </Text>
+
       </View>
     )
   }
