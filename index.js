@@ -9,9 +9,14 @@ import {
 
 class HelloWorld extends React.Component {
 
+  componentWillMount(){
+    console.log(NativeModules.RN_Module.Constant);
+  }
+
   rnCallNative(){
     NativeModules.RN_Module.rnCallNative("message");
   }
+
   render() {
     return (
       <View style={styles.container}>
