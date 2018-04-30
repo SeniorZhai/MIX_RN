@@ -27,13 +27,25 @@ class HelloWorld extends React.Component {
     NativeModules.RN_Module.rnCallNative("message");
   }
 
+  // 调用原生代码 并callback
+  callbackComm(msg) {
+       NativeModules.RN_Module.rnCallNativeFromCallback(msg,(result) => {
+            console.log("回调:" + result)
+       })
+   }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.hello}
 
-        onPress={this.rnCallNative.bind(this)}>
+        onPress={this.rnCallNative}>
         Click me
+        </Text>
+
+        <Text style={styles.hello}
+        onPress={this.callbackComm("调用原生callback")}>
+        Callback
         </Text>
       </View>
     )

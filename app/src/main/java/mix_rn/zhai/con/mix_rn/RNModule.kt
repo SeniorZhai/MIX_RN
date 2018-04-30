@@ -2,7 +2,9 @@ package mix_rn.zhai.con.mix_rn
 
 import android.support.annotation.Nullable
 import android.util.ArrayMap
+import android.util.Log
 import android.widget.Toast
+import com.facebook.react.bridge.Callback
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -31,6 +33,13 @@ class RNModule
   fun callRn(msg: String) {
     reactApplicationContext.getJSModule(
         DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit("EVENT", msg)
+  }
+
+  @ReactMethod
+  fun rnCallNativeFromCallback(msg: String, callback: Callback) {
+    Log.d("tag", msg)
+    val result = "回调RN"
+    callback.invoke(result)
   }
 
   @Nullable
