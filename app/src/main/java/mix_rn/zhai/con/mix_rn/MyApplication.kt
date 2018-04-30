@@ -26,8 +26,8 @@ class MyApplication : Application(), ReactApplication {
     override fun getReactInstanceManager(): ReactInstanceManager {
       return ReactInstanceManager.builder()
           .setApplication(instance)
-          .setBundleAssetName("index.android.bundle")
-          .setJSMainModulePath("index")
+          .setBundleAssetName("index.bundle") // 与本地相同
+          .setJSMainModulePath("index") 
           .addPackages(packages)
           .setUseDeveloperSupport(BuildConfig.DEBUG)
           .setInitialLifecycleState(LifecycleState.RESUMED)
