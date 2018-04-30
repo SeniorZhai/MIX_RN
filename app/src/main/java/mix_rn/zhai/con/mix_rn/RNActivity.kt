@@ -6,6 +6,10 @@ import android.view.KeyEvent
 import com.facebook.react.ReactInstanceManager
 import com.facebook.react.ReactRootView
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Timer
+import java.util.TimerTask
 
 
 class RNActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
@@ -20,7 +24,19 @@ class RNActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
     setContentView(mReactRootView)
     mReactRootView?.startReactApplication(
         mReactInstanceManager, "APP", null)
+    // 轮询任务
+    val sdf = SimpleDateFormat("HH:mm:ss")
+    val timer = Timer()
+    timer.schedule(object : TimerTask() {
+      override fun run() {
+        val currentTime = sdf.format(Date())
+        nativeCallRn("消息:$currentTime")
+      }
+    }, 3000, 5000)
+  }
 
+  fun nativeCallRn(msg: String) {
+    (application as MyApplication).getRNPackage().mModule.callRn(msg)
   }
 
   override fun onBackPressed() {
