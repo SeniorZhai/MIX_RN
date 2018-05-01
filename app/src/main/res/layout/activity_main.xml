@@ -22,4 +22,15 @@
       android:padding="10dp"
       android:text="進入RN界面"
       />
+
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/btn_go"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="20dp"
+      android:onClick="down"
+      android:padding="10dp"
+      android:text="下載"
+      />
 </RelativeLayout>

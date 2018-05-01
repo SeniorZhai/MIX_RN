@@ -19,15 +19,23 @@ class MyApplication : Application(), ReactApplication {
       return BuildConfig.DEBUG
     }
 
+    override fun getJSBundleFile(): String? {
+      val bundleFile = this@MyApplication.getBundlePath()
+      if (bundleFile.exists()) {
+        return bundleFile.absolutePath
+      }
+      return super.getJSBundleFile()
+    }
+
     override fun getPackages(): List<ReactPackage> {
       return Arrays.asList(MainReactPackage(), mCommPackage)
     }
 
     override fun getReactInstanceManager(): ReactInstanceManager {
       return ReactInstanceManager.builder()
-          .setApplication(instance)
+          .setApplication(this@MyApplication)
           .setBundleAssetName("index.bundle") // 与本地相同
-          .setJSMainModulePath("index") 
+          .setJSMainModulePath("index")
           .addPackages(packages)
           .setUseDeveloperSupport(BuildConfig.DEBUG)
           .setInitialLifecycleState(LifecycleState.RESUMED)
@@ -37,7 +45,6 @@ class MyApplication : Application(), ReactApplication {
 
   override fun onCreate() {
     super.onCreate()
-    instance = this
     appContext = applicationContext
     SoLoader.init(this, false)
   }
@@ -53,7 +60,6 @@ class MyApplication : Application(), ReactApplication {
   companion object {
 
     lateinit var appContext: Context
-    lateinit var instance: MyApplication
 
     val mCommPackage = RNPackage()
   }
