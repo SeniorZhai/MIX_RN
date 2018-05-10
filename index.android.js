@@ -12,7 +12,7 @@ class HelloWorld extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.hello}>
-          第一版
+          原始
         </Text>
       </View>
     )

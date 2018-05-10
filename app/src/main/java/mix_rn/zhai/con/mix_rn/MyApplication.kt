@@ -3,12 +3,11 @@ package mix_rn.zhai.con.mix_rn
 import android.app.Application
 import android.content.Context
 import com.facebook.react.ReactApplication
-import com.facebook.react.ReactInstanceManager
 import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
-import com.facebook.react.common.LifecycleState
 import com.facebook.react.shell.MainReactPackage
 import com.facebook.soloader.SoLoader
+import java.io.File
 import java.util.Arrays
 
 class MyApplication : Application(), ReactApplication {
@@ -20,9 +19,8 @@ class MyApplication : Application(), ReactApplication {
     }
 
     override fun getJSBundleFile(): String? {
-      val bundleFile = this@MyApplication.getBundlePath()
-      if (bundleFile.exists()) {
-        return bundleFile.absolutePath
+      if (jsBundle?.exists() == true) {
+        return jsBundle!!.absolutePath
       }
       return super.getJSBundleFile()
     }
@@ -31,17 +29,9 @@ class MyApplication : Application(), ReactApplication {
       return Arrays.asList(MainReactPackage(), mCommPackage)
     }
 
-    override fun getReactInstanceManager(): ReactInstanceManager {
-      return ReactInstanceManager.builder()
-          .setApplication(this@MyApplication)
-          .setBundleAssetName("index.bundle") // 与本地相同
-          .setJSMainModulePath("index")
-          .addPackages(packages)
-          .setUseDeveloperSupport(BuildConfig.DEBUG)
-          .setInitialLifecycleState(LifecycleState.RESUMED)
-          .build()
-    }
   }
+
+  var jsBundle: File? = null
 
   override fun onCreate() {
     super.onCreate()

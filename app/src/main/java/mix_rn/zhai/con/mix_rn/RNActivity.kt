@@ -19,6 +19,7 @@ class RNActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
     mReactRootView = ReactRootView(this)
     mReactInstanceManager = (application as MyApplication).reactNativeHost.reactInstanceManager
 
+
     setContentView(mReactRootView)
     mReactRootView?.startReactApplication(
         mReactInstanceManager, "APP", null)
@@ -56,12 +57,12 @@ class RNActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
   override fun onDestroy() {
     super.onDestroy()
 
-    if (mReactInstanceManager != null) {
-      mReactInstanceManager!!.onHostDestroy(this)
-    }
+    mReactInstanceManager?.onHostDestroy(this)
+
     mReactRootView?.unmountReactApplication()
     mReactRootView = null
-
+    // 清除RN
+    (application as MyApplication).reactNativeHost.clear()
     timer.cancel()
   }
 

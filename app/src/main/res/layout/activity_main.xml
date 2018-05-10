@@ -6,6 +6,7 @@
     >
 
   <TextView
+      android:id="@+id/text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
@@ -20,7 +21,7 @@
       android:layout_marginTop="20dp"
       android:onClick="skip"
       android:padding="10dp"
-      android:text="進入RN界面"
+      android:text="enter"
       />
 
   <Button
@@ -31,6 +32,6 @@
       android:layout_marginTop="20dp"
       android:onClick="down"
       android:padding="10dp"
-      android:text="下載"
+      android:text="random"
       />
 </RelativeLayout>
